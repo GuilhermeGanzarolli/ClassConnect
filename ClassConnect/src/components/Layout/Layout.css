@@ -1,0 +1,6 @@
+.Conteudo{
+    display:flex;
+    justify-content: center;
+    min-height: 100vh;
+    font-size: 1.3em;
+}

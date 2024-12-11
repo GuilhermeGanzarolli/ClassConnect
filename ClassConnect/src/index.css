@@ -1,0 +1,11 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+:root{ 
+    font-family: Roboto;
+    justify-content: center;
+    border: 1px solid red;
+    background-color: #e9eef8;
+}
