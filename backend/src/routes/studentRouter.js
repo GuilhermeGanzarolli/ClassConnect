@@ -13,7 +13,7 @@ router.get('/', (req, res)=>{
     res.send('Rota teste dos alunos')
 })
 
-router.post('/', async (req, res) =>{
+router.post('/cadastrarAluno', async (req, res) =>{
     const aluno = new Aluno({
         nome: req.body.nome,
         idade: req.body.idade,
