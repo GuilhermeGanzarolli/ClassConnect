@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
+import styles from './PainelAlunos.module.css'
+
 
 const PainelAlunos = () => {
 
@@ -19,7 +21,7 @@ const PainelAlunos = () => {
   },[])
 
   return (
-    <div>
+    <div className={styles.conteudo}>
         <div>
           <h3>Cadastrar aluno</h3>
           <form action="" onSubmit={handleSubmit}>
@@ -35,11 +37,10 @@ const PainelAlunos = () => {
               <span>Série</span>
               <input type="text" />
             </label>
-            <input type="submit" />
+            <input className={styles.btnSubmit} type="submit" />
           </form>
         </div>
 
-        PainelDosAlunos
         {data && data.map((aluno)=>(
           <p key={aluno._id}>{aluno.nome}</p>
         ))}

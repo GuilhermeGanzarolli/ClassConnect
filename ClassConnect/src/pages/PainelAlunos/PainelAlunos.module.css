@@ -1,0 +1,39 @@
+.conteudo{
+    text-align: center;
+}
+
+h3{
+    font-size: 2em;
+    color: rgb(43, 51, 85);
+    margin-bottom: .6em;
+}
+
+form{
+    margin-bottom: .5em;
+}
+
+label{
+    margin-right: .7em;
+}
+
+span{
+    margin-right: .3em;
+}
+
+input{
+    border: 1.5px solid gray;
+    font-size: 1em;
+    padding: .3em .4em;
+    border-radius: 5px;
+}
+
+.btnSubmit{
+    font-size: 1em;
+    padding: .3em .8em;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.btnSubmit:hover{
+    background-color: rgb(197, 255, 197);
+}
