@@ -6,10 +6,29 @@ import styles from './PainelAlunos.module.css'
 const PainelAlunos = () => {
 
   const [data, setData] = useState(null)
+  const [nome, setNome] = useState("")
+  const [idade, setIdade] = useState("")
+  const [serie, setSerie] = useState("")
+  const [responseMessage, setResponseMessage] = useState("")
 
   const handleSubmit = (e) =>{
     e.preventDefault()
-    console.log("Formulário enviado")
+
+    const aluno = {
+      nome,
+      idade,
+      serie
+    }
+    
+    fetch('http://localhost:5000/api/students/cadastrarAluno',{
+      method:'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(aluno)
+    })
+    .then(response => response.json())
+    .then(data => setResponseMessage(data.message))
+    .catch(error => console.error("Error: ", error))
+
   }
 
   useEffect(()=>{
@@ -27,22 +46,23 @@ const PainelAlunos = () => {
           <form action="" onSubmit={handleSubmit}>
             <label htmlFor="">
               <span>Nome</span>
-              <input type="text" />
+              <input type="text" onChange={(e)=>setNome(e.target.value)} value={nome}/>
             </label>
             <label htmlFor="">
               <span>Idade</span>
-              <input type="text" />
+              <input type="text" onChange={(e)=>setIdade(e.target.value)} value={idade}/>
             </label>
             <label htmlFor="">
               <span>Série</span>
-              <input type="text" />
+              <input type="text" onChange={(e)=>setSerie(e.target.value)} value={serie}/>
             </label>
             <input className={styles.btnSubmit} type="submit" />
           </form>
+          {responseMessage && responseMessage}
         </div>
 
         {data && data.map((aluno)=>(
-          <p key={aluno._id}>{aluno.nome}</p>
+          <p key={aluno._id}> {aluno.nome} - {aluno.idade} - {aluno.serie}*</p>
         ))}
     </div>
   )
