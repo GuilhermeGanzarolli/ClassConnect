@@ -27,6 +27,11 @@ input{
     border-radius: 5px;
 }
 
+.areaMsg{
+    height: 1em;
+    width: 100%;
+}
+
 .btnSubmit{
     font-size: 1em;
     padding: .3em .8em;
@@ -36,4 +41,23 @@ input{
 
 .btnSubmit:hover{
     background-color: rgb(197, 255, 197);
+}
+
+table{
+    margin-top: 1em;
+    width: 100%;
+}
+
+.btnDeletar{
+    padding: .4em .6em;
+    cursor: pointer;
+    color: rgb(245, 244, 255);
+    background-color: rgb(255, 73, 73);
+    border-radius: 5px;
+    border: 1px solid rgb(153, 153, 153);
+    transition: .4s;
+}
+
+.btnDeletar:hover{
+    background-color: rgb(230, 26, 26);
 }

@@ -10,6 +10,8 @@ const PainelAlunos = () => {
   const [idade, setIdade] = useState("")
   const [serie, setSerie] = useState("")
   const [responseMessage, setResponseMessage] = useState("")
+  const [listaNovosAlunos, setListaNovosAlunos]= useState([])
+
 
   const handleSubmit = (e) =>{
     e.preventDefault()
@@ -26,18 +28,38 @@ const PainelAlunos = () => {
       body: JSON.stringify(aluno)
     })
     .then(response => response.json())
-    .then(data => setResponseMessage(data.message))
+    .then(data => {
+      setListaNovosAlunos(aluno)
+      setResponseMessage(data.message)
+    })
     .catch(error => console.error("Error: ", error))
+
+    setNome("")
+    setIdade("")
+    setSerie("")
+  }
+
+  const handleDelete = (id) =>{
+    fetch(`http://localhost:5000/api/students/${id}`,{
+      method: 'DELETE'
+    })
+      .then(response =>response.json())
+      .then(data=>{
+        setResponseMessage(data.message)
+        setListaNovosAlunos(id)
+      })
+      .catch(err => console.log('Erro ao deletar o item', err))
 
   }
 
   useEffect(()=>{
     fetch('http://localhost:5000/api/students/alunos')
       .then(response=>response.json())
-      .then(data=>setData(data))
+      .then(data=>{
+        setData(data)
+      })
       .catch(error=>console.error(error))
-    
-  },[])
+  },[listaNovosAlunos])
 
   return (
     <div className={styles.conteudo}>
@@ -58,12 +80,31 @@ const PainelAlunos = () => {
             </label>
             <input className={styles.btnSubmit} type="submit" />
           </form>
-          {responseMessage && responseMessage}
+          <div className={styles.areaMsg}>
+            {responseMessage && responseMessage}
+          </div>
         </div>
 
-        {data && data.map((aluno)=>(
-          <p key={aluno._id}> {aluno.nome} - {aluno.idade} - {aluno.serie}*</p>
+        <table>
+          <tr>
+            <th>Nome</th>
+            <th>Idade</th>
+            <th>Série</th>
+            <th>Opções</th>
+          </tr>
+          {data && data.map((aluno)=>(
+          <tr key={aluno._id}>
+            <td>{aluno.nome}</td>
+            <td>{aluno.idade}</td>
+            <td>{aluno.serie}</td>
+            <td>
+              <button className={styles.btnDeletar} onClick={()=>handleDelete(aluno._id)}>
+                Deletar
+              </button>
+            </td>
+          </tr>
         ))}
+        </table>
     </div>
   )
 }

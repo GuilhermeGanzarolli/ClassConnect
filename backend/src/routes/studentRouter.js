@@ -35,4 +35,9 @@ router.get('/alunoEspecifico', async (req, res)=>{
     res.send(alunos)
 })
 
+router.delete("/:id", async(req, res) =>{
+    const aluno = await Aluno.findByIdAndDelete(req.params.id)
+    return res.json({message:`Usuário ${aluno.nome} deletado com sucesso`})
+})
+
 module.exports = router
