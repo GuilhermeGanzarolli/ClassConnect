@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react'
 
+import useFetch from '../../hooks/useFetch'
+
 import styles from './PainelAlunos.module.css'
 
 
 const PainelAlunos = () => {
 
-  const [data, setData] = useState(null)
   const [nome, setNome] = useState("")
   const [idade, setIdade] = useState("")
   const [serie, setSerie] = useState("")
   const [responseMessage, setResponseMessage] = useState("")
   const [listaNovosAlunos, setListaNovosAlunos]= useState([])
+
+  const {data:alunos, loading, error} = useFetch('http://localhost:5000/api/students/alunos')
 
 
   const handleSubmit = (e) =>{
@@ -52,15 +55,6 @@ const PainelAlunos = () => {
 
   }
 
-  useEffect(()=>{
-    fetch('http://localhost:5000/api/students/alunos')
-      .then(response=>response.json())
-      .then(data=>{
-        setData(data)
-      })
-      .catch(error=>console.error(error))
-  },[listaNovosAlunos])
-
   return (
     <div className={styles.conteudo}>
         <div>
@@ -92,7 +86,7 @@ const PainelAlunos = () => {
             <th>Série</th>
             <th>Opções</th>
           </tr>
-          {data && data.map((aluno)=>(
+          {alunos && alunos.map((aluno)=>(
           <tr key={aluno._id}>
             <td>{aluno.nome}</td>
             <td>{aluno.idade}</td>
