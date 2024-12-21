@@ -15,6 +15,7 @@ import Home from './pages/Home/Home.jsx'
 import PainelAlunos from './pages/PainelAlunos/PainelAlunos.jsx'
 import Classes from './pages/PainelClasse/Classes.jsx'
 import PainelProfessores from './pages/PainelProfessores/PainelProfessores.jsx'
+import PainelDoAluno from './pages/PainelDoAluno/PainelDoAluno.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -22,6 +23,7 @@ createRoot(document.getElementById('root')).render(
       <Route path='/' element={<Layout/>} >
         <Route index element={<Home/>}/>
         <Route path='/painel-alunos' element={<PainelAlunos/>}/>
+        <Route path='/painel-aluno/:id' element={<PainelDoAluno/>}/>
         <Route path='/painel-classes' element={<Classes/>}/>
         <Route path='/painel-professores' element={<PainelProfessores/>}/>
       </Route>

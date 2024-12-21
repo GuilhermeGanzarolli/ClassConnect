@@ -30,8 +30,8 @@ router.get('/alunos', async (req, res)=>{
     res.send(alunos)
 })
 
-router.get('/alunoEspecifico', async (req, res)=>{
-    const alunos = await Aluno.findOne({nome:"Guilherme"})
+router.get(`/alunoEspecifico/:IdAluno`, async (req, res)=>{
+    const alunos = await Aluno.findById({_id:req.params.IdAluno})
     res.send(alunos)
 })
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import {Link} from 'react-router'
 
 import useFetch from '../../hooks/useFetch'
 
@@ -13,10 +14,10 @@ const PainelAlunos = () => {
   const [responseMessage, setResponseMessage] = useState("")
   const [listaNovosAlunos, setListaNovosAlunos]= useState([])
 
-  const {data:alunos, loading, error} = useFetch('http://localhost:5000/api/students/alunos')
+  const {data:alunos, loading, error, refech} = useFetch('http://localhost:5000/api/students/alunos')
 
 
-  const handleSubmit = (e) =>{
+  const handleSubmit = async (e) =>{
     e.preventDefault()
 
     const aluno = {
@@ -25,7 +26,7 @@ const PainelAlunos = () => {
       serie
     }
     
-    fetch('http://localhost:5000/api/students/cadastrarAluno',{
+    await fetch('http://localhost:5000/api/students/cadastrarAluno',{
       method:'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(aluno)
@@ -40,10 +41,12 @@ const PainelAlunos = () => {
     setNome("")
     setIdade("")
     setSerie("")
+    alert(`Aluno ${aluno.nome} cadastrado com sucesso`)
+    refech()
   }
 
-  const handleDelete = (id) =>{
-    fetch(`http://localhost:5000/api/students/${id}`,{
+  const handleDelete = async (id) =>{
+    await fetch(`http://localhost:5000/api/students/${id}`,{
       method: 'DELETE'
     })
       .then(response =>response.json())
@@ -52,7 +55,7 @@ const PainelAlunos = () => {
         setListaNovosAlunos(id)
       })
       .catch(err => console.log('Erro ao deletar o item', err))
-
+      refech()
   }
 
   return (
@@ -81,6 +84,7 @@ const PainelAlunos = () => {
 
         <table>
           <tr>
+            <th>#</th>
             <th>Nome</th>
             <th>Idade</th>
             <th>Série</th>
@@ -88,6 +92,7 @@ const PainelAlunos = () => {
           </tr>
           {alunos && alunos.map((aluno)=>(
           <tr key={aluno._id}>
+            <td><Link to={`/painel-aluno/${aluno._id}`} >#</Link></td>
             <td>{aluno.nome}</td>
             <td>{aluno.idade}</td>
             <td>{aluno.serie}</td>
