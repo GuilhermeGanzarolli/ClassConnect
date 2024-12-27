@@ -11,6 +11,7 @@ const PainelAlunos = () => {
   const [nome, setNome] = useState("")
   const [idade, setIdade] = useState("")
   const [serie, setSerie] = useState("")
+  const [materias, setMaterias] = useState("")
   const [responseMessage, setResponseMessage] = useState("")
   const [listaNovosAlunos, setListaNovosAlunos]= useState([])
 
@@ -23,7 +24,8 @@ const PainelAlunos = () => {
     const aluno = {
       nome,
       idade,
-      serie
+      serie,
+      materiasMatriculadas
     }
     
     await fetch('http://localhost:5000/api/students/cadastrarAluno',{

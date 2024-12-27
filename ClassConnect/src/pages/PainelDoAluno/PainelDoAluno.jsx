@@ -18,6 +18,7 @@ const PainelDoAluno = () => {
   return (
     <div>
         {infoAluno && infoAluno.nome}
+        
     </div>
   )
 }
